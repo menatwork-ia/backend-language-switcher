@@ -8,5 +8,5 @@
  * @filesource
  */
 
-$GLOBALS['TL_LANG']['tl_page']['belanguage_legend']     = 'Sprachenwechsler';
+$GLOBALS['TL_LANG']['tl_page']['belanguage_legend']     = 'Backend-Sprachenwechsler';
 $GLOBALS['TL_LANG']['tl_page']['language_links']        = array('Weitere Übersetzungen dieser Seite', '');
