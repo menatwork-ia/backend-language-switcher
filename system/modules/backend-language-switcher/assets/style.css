@@ -1,0 +1,30 @@
+  .be-language-switch a {
+    margin:2px 0;
+  }
+
+  .be-language-switch a, 
+  .be-language-switch a * {
+    display:inline-block;
+  }
+
+  .be-language-switch .id {
+    color:#999999;
+  }
+
+  .be-language-switch .language {
+    border:1px solid #999999;
+    -webkit-border-radius:2px;
+    border-radius:2px;
+    padding:2px;
+    min-width:15px;
+    text-align:center;
+    margin-right:6px;
+    background-color:#999999;
+    color:#fff;
+  }
+
+  .be-language-switch .active .language {
+    border:1px solid #555555;
+    background-color:#555555;
+    color:#fff;
+  }
