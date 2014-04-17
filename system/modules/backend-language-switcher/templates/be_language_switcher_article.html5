@@ -1,0 +1,3 @@
+<a <?php if ($this->article['isActive']) echo 'class="active" '; ?>title="" href="<?php echo $this->article['href']; ?>"><span class="language"><?php echo $this->article['language']; ?></span>
+<?php echo $this->article['title']; ?> <span class="id">(ID: <?php echo $this->article['id'];?>)</span>
+</a>
