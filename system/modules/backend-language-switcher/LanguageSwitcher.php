@@ -25,11 +25,18 @@ class LanguageSwitcher extends \Backend
 
     static public $arrPageCache = array();
 
+    /* ---- Common functions ---- */
+    /**
+     * @param $varValue
+     *
+     * @return string returns an empty string.
+     */
     public function returnNull($varValue)
     {
         return '';
     }
 
+    /* ---- Pages ---- */
     /**
      * @param $dc
      */
