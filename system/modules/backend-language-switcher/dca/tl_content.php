@@ -10,3 +10,4 @@
  */
 
 $GLOBALS['TL_DCA']['tl_content']['list']['sorting']['header_callback'] = array('BackendLanguageSwitcher\LanguageSwitcher', 'addArticleTranslations');
+$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('BackendLanguageSwitcher\LanguageSwitcher', 'addArticleTranslationHeaderCss');

@@ -9,4 +9,4 @@
  */
 
 $GLOBALS['TL_LANG']['tl_page']['belanguage_legend']     = 'Backend language switcher';
-$GLOBALS['TL_LANG']['tl_page']['language_links']        = array('Other languages of this page', '');
+$GLOBALS['TL_LANG']['tl_page']['page_links']            = array('Other languages of this page', '');

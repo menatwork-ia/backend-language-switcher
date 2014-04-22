@@ -8,4 +8,4 @@
  * @filesource
  */
 
-$GLOBALS['TL_LANG']['tl_content']['belanguage_header']     = 'Translations: ';
+$GLOBALS['TL_LANG']['tl_content']['belanguage_header']     = 'Translations';

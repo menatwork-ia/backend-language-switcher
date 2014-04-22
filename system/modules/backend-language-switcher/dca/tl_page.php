@@ -14,9 +14,9 @@ $GLOBALS['TL_DCA']['tl_page']['config']['onload_callback'][] = array('BackendLan
 /**
  * Fields
  */
-$GLOBALS['TL_DCA']['tl_page']['fields']['language_links'] = array
+$GLOBALS['TL_DCA']['tl_page']['fields']['page_links'] = array
 (
-    'label'                          => &$GLOBALS['TL_LANG']['tl_page']['language_links'],
+    'label'                          => &$GLOBALS['TL_LANG']['tl_page']['page_links'],
     'inputType'                      => 'multiColumnWizard',
     'load_callback'                  => array
     (

@@ -46,12 +46,12 @@ class LanguageSwitcher extends \Backend
     {
         if (\Input::get('act') == edit)
         {
-            $GLOBALS['TL_CSS'][] = 'system/modules/backend-language-switcher/assets/style.css';
+            $GLOBALS['TL_CSS'][] = 'system/modules/backend-language-switcher/assets/edit.css';
             foreach ($GLOBALS['TL_DCA']['tl_page']['palettes'] as $key => $strPallett)
             {
                 //skip '__selector__
                 if ($key == '__selector__') continue;
-                $GLOBALS['TL_DCA']['tl_page']['palettes'][$key] = '{belanguage_legend},language_links;' . $GLOBALS['TL_DCA']['tl_page']['palettes'][$key];
+                $GLOBALS['TL_DCA']['tl_page']['palettes'][$key] = '{belanguage_legend},page_links;' . $GLOBALS['TL_DCA']['tl_page']['palettes'][$key];
             }
         }
     }
@@ -137,13 +137,24 @@ class LanguageSwitcher extends \Backend
     {
         if (\Input::get('act') == edit)
         {
-            $GLOBALS['TL_CSS'][] = 'system/modules/backend-language-switcher/assets/style.css';
+            $GLOBALS['TL_CSS'][] = 'system/modules/backend-language-switcher/assets/edit.css';
             foreach ($GLOBALS['TL_DCA']['tl_article']['palettes'] as $key => $strPallett)
             {
                 //skip '__selector__
                 if ($key == '__selector__') continue;
                 $GLOBALS['TL_DCA']['tl_article']['palettes'][$key] = '{belanguage_legend},article_links;' . $GLOBALS['TL_DCA']['tl_page']['palettes'][$key];
             }
+        }
+    }
+
+    /**
+     * @param $dc
+     */
+    public function addArticleTranslationHeaderCss($dc)
+    {
+        if (\Input::get('act') != edit)
+        {
+            $GLOBALS['TL_CSS'][] = 'system/modules/backend-language-switcher/assets/header.css';
         }
     }
 

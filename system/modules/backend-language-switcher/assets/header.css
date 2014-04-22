@@ -1,0 +1,24 @@
+.tl_header_table li {
+  display:inline-block;
+  margin-right:10px;
+  text-transform:uppercase;
+  padding-right:14px;
+  border-right:1px solid #555555;
+  line-height:1;
+}
+
+.tl_header_table li:last-child {
+  margin-right:0;
+  padding-right:0;
+  border-right:0;
+}
+
+.tl_header_table ul .active {
+  color: #77AC45;
+}
+
+.tl_header_table ul .id {
+  color: #999999;
+  text-transform:none;
+}
+
