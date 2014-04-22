@@ -166,6 +166,7 @@ class LanguageSwitcher extends \Backend
         {
             $objTemplate = new \BackendTemplate('be_language_switcher_article');
             $arrArticle = LanguageSwitcher::$arrArticleCache[$value][$intArticlePosition]->row();
+            $arrArticle['language'] = LanguageSwitcher::$arrArticleCache[$value]['rootIdLanguage'];
             $arrArticle['href'] = TL_PATH . '/contao/main.php?do=article&act=edit&id=' . $arrArticle['id'] . '&rt=' . REQUEST_TOKEN;
             if (\Input::get('id') == $arrArticle['id'])
                 $arrArticle['isActive'] = true;
@@ -226,7 +227,9 @@ class LanguageSwitcher extends \Backend
                 //store pageDetails in cache
                 LanguageSwitcher::$arrArticleCache[$value] = \ArticleModel::findBy('pid', $value, array('order' => 'sorting ASC'))->getModels();
                 //add sorting value of the root page
-                LanguageSwitcher::$arrArticleCache[$value]['rootIdSorting'] = \Database::getInstance()->prepare('SELECT sorting FROM tl_page WHERE id = (SELECT cca_rr_root FROM tl_page WHERE id = ?)')->execute($value)->sorting;
+                $objPage = \Database::getInstance()->prepare('SELECT * FROM tl_page WHERE id = (SELECT cca_rr_root FROM tl_page WHERE id = ?)')->execute($value);
+                LanguageSwitcher::$arrArticleCache[$value]['rootIdSorting'] = $objPage->sorting;
+                LanguageSwitcher::$arrArticleCache[$value]['rootIdLanguage'] = $objPage->language;
             }
         }
         return;
