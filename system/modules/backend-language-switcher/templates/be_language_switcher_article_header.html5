@@ -1,5 +1,6 @@
 <ul>
 <?php foreach ($this->arrArticles as $article): ?>
-    <li><?php echo $article; ?></li>
+    <li><a <?php if ($article['isActive']) echo 'class="active" '; ?>title="" href="<?php echo $article['href']; ?>"><span class="language"><?php echo $article['language']; ?></span>
+            <?php echo $article['title']; ?> <span class="id">(ID: <?php echo $article['id'];?>)</span></a></li>
 <?php endforeach; ?>
 </ul>

@@ -219,7 +219,35 @@ class LanguageSwitcher extends \Backend
 
     public function addArticleTranslations($add, $dc)
     {
-        $arrArticles = $this->getTranslationArticles();
+
+        $arrArticles = array();
+        $objArticle = \ArticleModel::findByPk(\Input::get('id'));
+
+        //get the related pages
+        $arrIds = LanguageRelations::getRelations($objArticle->pid);
+        $arrIds[] = $objArticle->pid;
+
+        //get the articles of the related pages
+        $this->collectArticlesFromPages($arrIds);
+        $intArticlePosition = $this->getArticlePosition($objArticle);
+
+        //sort the pages
+        usort($arrIds, function($a, $b){
+            return (LanguageSwitcher::$arrArticleCache[$a]['rootIdSorting'] < LanguageSwitcher::$arrArticleCache[$b]['rootIdSorting']) ? -1 : 1;});
+
+        foreach ($arrIds as $value)
+        {
+            if (!LanguageSwitcher::$arrArticleCache[$value])
+                $this->collectArticlesFromPages(array($value));
+
+            $arrArticle = LanguageSwitcher::$arrArticleCache[$value][$intArticlePosition]->row();
+            $arrArticle['language'] = LanguageSwitcher::$arrArticleCache[$value]['rootIdLanguage'];
+            $arrArticle['href'] = TL_PATH . '/contao/main.php?do=article&table=tl_content&id=' . $arrArticle['id'] . '&rt=' . REQUEST_TOKEN;
+            if (\Input::get('id') == $arrArticle['id'])
+                $arrArticle['isActive'] = true;
+            $arrArticles[] = $arrArticle;
+        }
+
         $objTemplate = new \BackendTemplate('be_language_switcher_article_header');
         $objTemplate->arrArticles = $arrArticles;
 
