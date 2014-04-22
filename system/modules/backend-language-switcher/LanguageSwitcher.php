@@ -164,6 +164,9 @@ class LanguageSwitcher extends \Backend
 
         foreach ($arrIds as $value)
         {
+            if (!LanguageSwitcher::$arrArticleCache[$value])
+                $this->collectArticlesFromPages(array($value));
+
             $objTemplate = new \BackendTemplate('be_language_switcher_article');
             $arrArticle = LanguageSwitcher::$arrArticleCache[$value][$intArticlePosition]->row();
             $arrArticle['language'] = LanguageSwitcher::$arrArticleCache[$value]['rootIdLanguage'];
@@ -212,6 +215,17 @@ class LanguageSwitcher extends \Backend
             );
         }
         return serialize($newValues);
+    }
+
+    public function addArticleTranslations($add, $dc)
+    {
+        $arrArticles = $this->getTranslationArticles();
+        $objTemplate = new \BackendTemplate('be_language_switcher_article_header');
+        $objTemplate->arrArticles = $arrArticles;
+
+        $add[$GLOBALS['TL_LANG']['tl_content']['belanguage_header']] = $objTemplate->parse();
+
+        return ($add);
     }
 
     /**

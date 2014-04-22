@@ -31,6 +31,7 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-    'be_language_switcher_page'       => 'system/modules/backend-language-switcher/templates',
-    'be_language_switcher_article'    => 'system/modules/backend-language-switcher/templates',
+    'be_language_switcher_page'           => 'system/modules/backend-language-switcher/templates',
+    'be_language_switcher_article'        => 'system/modules/backend-language-switcher/templates',
+    'be_language_switcher_article_header' => 'system/modules/backend-language-switcher/templates',
 ));

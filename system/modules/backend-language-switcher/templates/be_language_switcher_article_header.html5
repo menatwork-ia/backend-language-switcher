@@ -1,0 +1,5 @@
+<ul>
+<?php foreach ($this->arrArticles as $article): ?>
+    <li><?php echo $article; ?></li>
+<?php endforeach; ?>
+</ul>
