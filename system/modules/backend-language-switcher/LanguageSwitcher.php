@@ -44,7 +44,7 @@ class LanguageSwitcher extends \Backend
      */
     public function addPageTranslationLinks($dc)
     {
-        if (\Input::get('act') == edit)
+        if (\Input::get('act') == edit && LanguageRelations::getRelations(\Input::get('id')))
         {
             $GLOBALS['TL_CSS'][] = 'system/modules/backend-language-switcher/assets/edit.css';
             foreach ($GLOBALS['TL_DCA']['tl_page']['palettes'] as $key => $strPallett)
@@ -137,6 +137,9 @@ class LanguageSwitcher extends \Backend
     {
         if (\Input::get('act') == edit)
         {
+            $objArticle = \ArticleModel::findByPk(\Input::get('id'));
+            if (!LanguageRelations::getRelations($objArticle->pid)) return;
+
             $GLOBALS['TL_CSS'][] = 'system/modules/backend-language-switcher/assets/edit.css';
             foreach ($GLOBALS['TL_DCA']['tl_article']['palettes'] as $key => $strPallett)
             {
