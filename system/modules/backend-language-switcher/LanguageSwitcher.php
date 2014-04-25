@@ -171,6 +171,7 @@ class LanguageSwitcher extends \Backend
         $objArticle = \ArticleModel::findByPk(\Input::get('id'));
 
         $intArticlePosition = $this->getArticlePosition($objArticle);
+        if ($intArticlePosition === null) return $arrReturn;
 
         //get the related pages
         $arrIds = LanguageRelations::getRelations($objArticle->pid);
@@ -244,11 +245,15 @@ class LanguageSwitcher extends \Backend
 
         //get the related pages
         $arrIds = LanguageRelations::getRelations($objArticle->pid);
+        //return if no related pages are found
+        if (empty($arrIds)) return $add;
+
         $arrIds[] = $objArticle->pid;
 
         //get the articles of the related pages
         $this->collectArticlesFromPages($arrIds);
         $intArticlePosition = $this->getArticlePosition($objArticle);
+        if ($intArticlePosition === null) return $add;
 
         //sort the pages
         usort($arrIds, function($a, $b){
@@ -270,7 +275,8 @@ class LanguageSwitcher extends \Backend
                 $arrArticle['isActive'] = true;
             $arrArticles[] = $arrArticle;
         }
-
+        //return if no realted articles could be found
+        if (count($arrArticles) <= 2) return $add;
         $objTemplate = new \BackendTemplate('be_language_switcher_article_header');
         $objTemplate->arrArticles = $arrArticles;
 
@@ -310,12 +316,11 @@ class LanguageSwitcher extends \Backend
         if (!LanguageSwitcher::$arrArticleCache[$objArticle->pid])
             $this->collectArticlesFromPages(array($objArticle->pid));
 
-        $intArticlePosition = 0;
+        $intArticlePosition = null;
         foreach (LanguageSwitcher::$arrArticleCache[$objArticle->pid] as $key => $article)
         {
-            if ($article->id == $objArticle->pid) $intArticlePosition = $key;
+            if ($article->id == $objArticle->id) $intArticlePosition = $key;
         }
-
         return $intArticlePosition;
     }
 }
