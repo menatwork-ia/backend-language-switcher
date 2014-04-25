@@ -175,8 +175,13 @@ class LanguageSwitcher extends \Backend
 
         foreach ($arrIds as $value)
         {
+            //try to load article if not in cache
             if (!LanguageSwitcher::$arrArticleCache[$value])
                 $this->collectArticlesFromPages(array($value));
+
+            //skip this page if no matching article is found
+            if (!LanguageSwitcher::$arrArticleCache[$value][$intArticlePosition])
+                continue;
 
             $objTemplate = new \BackendTemplate('be_language_switcher_article');
             $arrArticle = LanguageSwitcher::$arrArticleCache[$value][$intArticlePosition]->row();
@@ -251,6 +256,10 @@ class LanguageSwitcher extends \Backend
             if (!LanguageSwitcher::$arrArticleCache[$value])
                 $this->collectArticlesFromPages(array($value));
 
+            //skip this page if no matching article is found
+            if (!LanguageSwitcher::$arrArticleCache[$value][$intArticlePosition])
+                continue;
+
             $arrArticle = LanguageSwitcher::$arrArticleCache[$value][$intArticlePosition]->row();
             $arrArticle['language'] = LanguageSwitcher::$arrArticleCache[$value]['rootIdLanguage'];
             $arrArticle['href'] = TL_PATH . '/contao/main.php?do=article&table=tl_content&id=' . $arrArticle['id'] . '&rt=' . REQUEST_TOKEN;
@@ -277,8 +286,10 @@ class LanguageSwitcher extends \Backend
             //update cache if necessary
             if (!LanguageSwitcher::$arrArticleCache[$value])
             {
+                $objArticle = \ArticleModel::findBy('pid', $value, array('order' => 'sorting ASC'));
+                if ($objArticle === null) continue;
                 //store pageDetails in cache
-                LanguageSwitcher::$arrArticleCache[$value] = \ArticleModel::findBy('pid', $value, array('order' => 'sorting ASC'))->getModels();
+                LanguageSwitcher::$arrArticleCache[$value] = $objArticle->getModels();
                 //add sorting value of the root page
                 $objPage = \Database::getInstance()->prepare('SELECT * FROM tl_page WHERE id = (SELECT cca_rr_root FROM tl_page WHERE id = ?)')->execute($value);
                 LanguageSwitcher::$arrArticleCache[$value]['rootIdSorting'] = $objPage->sorting;
