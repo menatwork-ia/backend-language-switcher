@@ -145,7 +145,7 @@ class LanguageSwitcher extends \Backend
             {
                 //skip '__selector__
                 if ($key == '__selector__') continue;
-                $GLOBALS['TL_DCA']['tl_article']['palettes'][$key] = '{belanguage_legend},article_links;' . $GLOBALS['TL_DCA']['tl_page']['palettes'][$key];
+                $GLOBALS['TL_DCA']['tl_article']['palettes'][$key] = '{belanguage_legend},article_links;' . $GLOBALS['TL_DCA']['tl_article']['palettes'][$key];
             }
         }
     }
@@ -275,8 +275,9 @@ class LanguageSwitcher extends \Backend
                 $arrArticle['isActive'] = true;
             $arrArticles[] = $arrArticle;
         }
+
         //return if no realted articles could be found
-        if (count($arrArticles) <= 2) return $add;
+        if (count($arrArticles) <= 1) return $add;
         $objTemplate = new \BackendTemplate('be_language_switcher_article_header');
         $objTemplate->arrArticles = $arrArticles;
 
