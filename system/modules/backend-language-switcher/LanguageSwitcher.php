@@ -241,7 +241,17 @@ class LanguageSwitcher extends \Backend
     {
 
         $arrArticles = array();
-        $objArticle = \ArticleModel::findByPk(\Input::get('id'));
+        //find the current article
+        if (\Input::get('act') == 'paste' && \Input::get('mode') == 'copy')
+        {
+            $intCePid = \Database::getInstance()->prepare('Select pid FROM tl_content WHERE id = ?')->execute(\Input::get('id'))->pid;
+            $objArticle = \ArticleModel::findByPk($intCePid);
+        }
+        else
+        {
+            $objArticle = \ArticleModel::findByPk(\Input::get('id'));
+        }
+
 
         //get the related pages
         $arrIds = LanguageRelations::getRelations($objArticle->pid);
