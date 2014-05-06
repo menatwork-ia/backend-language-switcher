@@ -244,7 +244,7 @@ class LanguageSwitcher extends \Backend
 
         $arrArticles = array();
         //find the current article
-        if (\Input::get('act') == 'paste' && \Input::get('mode') == 'copy')
+        if (\Input::get('act') == 'paste' && (\Input::get('mode') == 'copy' || \Input::get('mode') == 'cut'))
         {
             $intCePid = \Database::getInstance()->prepare('Select pid FROM tl_content WHERE id = ?')->execute(\Input::get('id'))->pid;
             $objArticle = \ArticleModel::findByPk($intCePid);
