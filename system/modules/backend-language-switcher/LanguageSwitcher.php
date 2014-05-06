@@ -240,6 +240,8 @@ class LanguageSwitcher extends \Backend
     public function addArticleTranslations($add, $dc)
     {
 
+        if (\Input::get('do') != 'article') return $add;
+
         $arrArticles = array();
         //find the current article
         if (\Input::get('act') == 'paste' && \Input::get('mode') == 'copy')
