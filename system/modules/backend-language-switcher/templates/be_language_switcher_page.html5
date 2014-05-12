@@ -1,3 +1,3 @@
 <a <?php if ($this->page['isActive']) echo 'class="active" '; ?>title="" href="<?php echo $this->page['href']; ?>"><span class="language"><?php echo $this->page['language']; ?></span>
-<?php echo $this->page['mainTitle']; ?> <span class="id">(ID: <?php echo $this->page['id'];?>)</span>
+<?php echo $this->page['title']; ?> <span class="id">(ID: <?php echo $this->page['id'];?>)</span>
 </a>
