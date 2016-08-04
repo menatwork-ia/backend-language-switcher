@@ -29,8 +29,8 @@
 		"php":">=5.3",
 		"contao/core":">=3.2,<4",
 		"contao-community-alliance/composer-installer":"*",
-		"contao-community-alliance/language-relations":"~1",
-		"menatwork/contao-multicolumnwizard":"~3.2",
+		"hofff/contao-language-relations":"~2",
+		"menatwork/contao-multicolumnwizard":"~3",
 		"discordier/justtextwidgets": ">=0.5"
 	},
 	"autoload":{
