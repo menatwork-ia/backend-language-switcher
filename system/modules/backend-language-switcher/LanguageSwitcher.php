@@ -11,7 +11,7 @@
 
 namespace BackendLanguageSwitcher;
 
-use ContaoCommunityAlliance\Contao\LanguageRelations\LanguageRelations;
+use Hofff\Contao\LanguageRelations\LanguageRelations;
 use PageModel;
 
 /**
@@ -313,7 +313,7 @@ class LanguageSwitcher extends \Backend
                 //store pageDetails in cache
                 LanguageSwitcher::$arrArticleCache[$value] = $objArticle->getModels();
                 //add sorting value of the root page
-                $objPage = \Database::getInstance()->prepare('SELECT * FROM tl_page WHERE id = (SELECT cca_rr_root FROM tl_page WHERE id = ?)')->execute($value);
+                $objPage = \Database::getInstance()->prepare('SELECT * FROM tl_page WHERE id = (SELECT hofff_root_page_id FROM tl_page WHERE id = ?)')->execute($value);
                 LanguageSwitcher::$arrArticleCache[$value]['rootIdSorting'] = $objPage->sorting;
                 LanguageSwitcher::$arrArticleCache[$value]['rootIdLanguage'] = $objPage->language;
             }
