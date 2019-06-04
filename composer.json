@@ -26,12 +26,11 @@
 		"source":"https://github.com/menatwork-ia/backend-language-switcher"
 	},
 	"require":{
-		"php":">=5.3",
-		"contao/core":">=3.2,<4",
-		"contao-community-alliance/composer-installer":"*",
-		"hofff/contao-language-relations":"~2",
-		"menatwork/contao-multicolumnwizard":"~3",
-		"discordier/justtextwidgets": ">=0.5"
+		"php": "^5.5 || ^7.0",
+		"contao/core-bundle": "^4.0",
+		"hofff/contao-language-relations":"^2.0",
+		"menatwork/contao-multicolumnwizard-bundle":"^3.4",
+		"discordier/justtextwidgets": "^1.2"
 	},
 	"autoload":{
 		"classmap":["system/"]
